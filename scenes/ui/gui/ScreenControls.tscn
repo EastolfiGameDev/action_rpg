@@ -1,0 +1,72 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://scenes/ui/gui/Joystick/VirtualButton.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/ui/gui/ScreenControls.gd" type="Script" id=2]
+[ext_resource path="res://scenes/ui/gui/Joystick/VirtualJoystick.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assets/icons/skill.png" type="Texture" id=4]
+[ext_resource path="res://assets/icons/attack_skill.png" type="Texture" id=5]
+[ext_resource path="res://assets/icons/movement_skill.png" type="Texture" id=6]
+
+[node name="ScreenControls" type="CanvasLayer"]
+script = ExtResource( 2 )
+
+[node name="VirtualJoystick" parent="." instance=ExtResource( 3 )]
+margin_right = -160.0
+margin_bottom = 1.52588e-05
+joystick_mode = 1
+vector_mode = 1
+
+[node name="Background" parent="VirtualJoystick" index="0"]
+margin_left = -155.0
+margin_top = -90.0
+margin_right = 95.0
+margin_bottom = 160.0
+rect_scale = Vector2( 0.2, 0.2 )
+
+[node name="AttackButton" parent="." instance=ExtResource( 1 )]
+margin_left = 222.072
+margin_top = 128.494
+margin_right = 350.072
+margin_bottom = 256.494
+rect_scale = Vector2( 0.2, 0.2 )
+
+[node name="Icon" parent="AttackButton" index="0"]
+texture = ExtResource( 5 )
+
+[node name="MovementSkillButton" parent="." instance=ExtResource( 1 )]
+margin_left = 261.877
+margin_top = 99.164
+margin_right = 389.877
+margin_bottom = 227.164
+rect_scale = Vector2( 0.2, 0.2 )
+
+[node name="Icon" parent="MovementSkillButton" index="0"]
+texture = ExtResource( 6 )
+
+[node name="SkillButton" parent="." instance=ExtResource( 1 )]
+margin_left = 265.369
+margin_top = 141.064
+margin_right = 393.369
+margin_bottom = 269.064
+rect_scale = Vector2( 0.2, 0.2 )
+enabled = false
+
+[node name="Icon" parent="SkillButton" index="0"]
+texture = ExtResource( 4 )
+[connection signal="button_down" from="AttackButton" to="." method="_on_AttackButton_button_down"]
+[connection signal="button_up" from="AttackButton" to="." method="_on_AttackButton_button_up"]
+[connection signal="pressed" from="AttackButton" to="." method="_on_AttackButton_pressed"]
+[connection signal="button_down" from="MovementSkillButton" to="." method="_on_MovementSkillButton_button_down"]
+[connection signal="button_up" from="MovementSkillButton" to="." method="_on_MovementSkillButton_button_up"]
+[connection signal="pressed" from="MovementSkillButton" to="." method="_on_MovementSkillButton_pressed"]
+[connection signal="button_down" from="SkillButton" to="." method="_on_SkillButton_button_down"]
+[connection signal="button_up" from="SkillButton" to="." method="_on_SkillButton_button_up"]
+[connection signal="pressed" from="SkillButton" to="." method="_on_SkillButton_pressed"]
+
+[editable path="VirtualJoystick"]
+
+[editable path="AttackButton"]
+
+[editable path="MovementSkillButton"]
+
+[editable path="SkillButton"]

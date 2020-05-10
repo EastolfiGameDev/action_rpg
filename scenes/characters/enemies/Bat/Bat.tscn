@@ -1,0 +1,188 @@
+[gd_scene load_steps=26 format=2]
+
+[ext_resource path="res://scenes/game/state_machine/states/motion/idle.gd" type="Script" id=1]
+[ext_resource path="res://scenes/characters/enemies/Bat/Bat.gd" type="Script" id=2]
+[ext_resource path="res://scenes/game/state_machine/states/motion/wander.gd" type="Script" id=3]
+[ext_resource path="res://scenes/game/state_machine/states/motion/chase.gd" type="Script" id=4]
+[ext_resource path="res://scenes/game/state_machine/states/combat/hurt.gd" type="Script" id=5]
+[ext_resource path="res://shaders/WhiteColor.shader" type="Shader" id=6]
+[ext_resource path="res://scenes/collisions/Hurtbox.tscn" type="PackedScene" id=7]
+[ext_resource path="res://scenes/collisions/DetectionZone.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/IA/WanderControler.tscn" type="PackedScene" id=9]
+[ext_resource path="res://scenes/collisions/SoftCollision.tscn" type="PackedScene" id=10]
+[ext_resource path="res://scenes/stats/Stats.tscn" type="PackedScene" id=11]
+[ext_resource path="res://scenes/collisions/Hitbox.tscn" type="PackedScene" id=12]
+[ext_resource path="res://scenes/game/state_machine/states/die.gd" type="Script" id=13]
+[ext_resource path="res://scenes/characters/enemies/Bat/StateMachine.gd" type="Script" id=14]
+[ext_resource path="res://assets/sprites/characters/enemies/Bat.png" type="Texture" id=15]
+[ext_resource path="res://assets/sprites/shadows/SmallShadow.png" type="Texture" id=16]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 6 )
+shader_param/active = false
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 3.5
+
+[sub_resource type="Animation" id=3]
+length = 0.5
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4 ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "blink_start"
+length = 0.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:material:shader_param/active")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "blink_stop"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:material:shader_param/active")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="CircleShape2D" id=6]
+radius = 70.0
+
+[sub_resource type="CapsuleShape2D" id=7]
+radius = 6.0
+height = 5.0
+
+[sub_resource type="CircleShape2D" id=8]
+radius = 4.0
+
+[sub_resource type="CircleShape2D" id=9]
+radius = 4.5
+
+[node name="Bat" type="KinematicBody2D"]
+collision_layer = 16
+script = ExtResource( 2 )
+
+[node name="Stats" parent="." instance=ExtResource( 11 )]
+max_health = 2
+
+[node name="Sprite" type="Sprite" parent="."]
+material = SubResource( 1 )
+position = Vector2( 0.463261, 0.463303 )
+texture = ExtResource( 15 )
+offset = Vector2( 0, -12 )
+hframes = 5
+frame = 2
+
+[node name="Shadow" type="Sprite" parent="."]
+texture = ExtResource( 16 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource( 2 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "fly"
+anims/fly = SubResource( 3 )
+
+[node name="Effects" type="AnimationPlayer" parent="."]
+anims/blink_start = SubResource( 4 )
+anims/blink_stop = SubResource( 5 )
+
+[node name="DetectionZone" parent="." instance=ExtResource( 8 )]
+visible = false
+
+[node name="CollisionShape2D" parent="DetectionZone" index="0"]
+shape = SubResource( 6 )
+
+[node name="Hurtbox" parent="." instance=ExtResource( 7 )]
+visible = false
+position = Vector2( 0, -13 )
+collision_layer = 8
+
+[node name="CollisionShape2D" parent="Hurtbox" index="0"]
+shape = SubResource( 7 )
+
+[node name="Hitbox" parent="." instance=ExtResource( 12 )]
+visible = false
+position = Vector2( 0, -13 )
+collision_mask = 4
+
+[node name="CollisionShape2D" parent="Hitbox" index="0"]
+shape = SubResource( 8 )
+
+[node name="SoftCollision" parent="." instance=ExtResource( 10 )]
+visible = false
+
+[node name="CollisionShape2D" parent="SoftCollision" index="0"]
+shape = SubResource( 9 )
+
+[node name="LookRaycast" type="RayCast2D" parent="."]
+enabled = true
+
+[node name="WanderControler" parent="." instance=ExtResource( 9 )]
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource( 14 )
+START_STATE = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateMachine"]
+script = ExtResource( 1 )
+possible_next_random_states = [ 0, 1 ]
+
+[node name="Wander" type="Node" parent="StateMachine"]
+script = ExtResource( 3 )
+possible_next_random_states = [ 0, 1 ]
+WanderControllerPath = NodePath("../../WanderControler")
+
+[node name="Chase" type="Node" parent="StateMachine"]
+script = ExtResource( 4 )
+detection_zone_path = NodePath("../../DetectionZone")
+look_raycast_path = NodePath("../../LookRaycast")
+
+[node name="Hurt" type="Node" parent="StateMachine"]
+script = ExtResource( 5 )
+
+[node name="Die" type="Node" parent="StateMachine"]
+script = ExtResource( 13 )
+[connection signal="no_health" from="Stats" to="." method="_on_Stats_no_health"]
+[connection signal="target_found" from="DetectionZone" to="." method="_on_DetectionZone_target_found"]
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
+[connection signal="invincibility_ended" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_ended"]
+[connection signal="invincibility_started" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_started"]
+[connection signal="wander_finish" from="WanderControler" to="StateMachine/Wander" method="_on_WanderControler_wander_finish"]
+
+[editable path="DetectionZone"]
+
+[editable path="Hurtbox"]
+
+[editable path="Hitbox"]
+
+[editable path="SoftCollision"]

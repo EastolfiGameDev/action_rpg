@@ -1,0 +1,41 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://resources/main_font.tres" type="DynamicFont" id=1]
+[ext_resource path="res://scenes/ui/menu/BottomNavigation.gd" type="Script" id=2]
+
+[node name="BottomNavigation" type="HBoxContainer"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -18.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+margin_right = 638.0
+margin_bottom = 18.0
+size_flags_horizontal = 3
+
+[node name="PreviousButton" type="Button" parent="CenterContainer"]
+margin_left = 292.0
+margin_right = 345.0
+margin_bottom = 18.0
+custom_fonts/font = ExtResource( 1 )
+text = "Previous"
+
+[node name="CenterContainer2" type="CenterContainer" parent="."]
+margin_left = 642.0
+margin_right = 1280.0
+margin_bottom = 18.0
+size_flags_horizontal = 3
+
+[node name="NextButton" type="Button" parent="CenterContainer2"]
+margin_left = 303.0
+margin_right = 334.0
+margin_bottom = 18.0
+custom_fonts/font = ExtResource( 1 )
+text = "Next"
+[connection signal="pressed" from="CenterContainer/PreviousButton" to="." method="_on_PreviousButton_pressed"]
+[connection signal="pressed" from="CenterContainer2/NextButton" to="." method="_on_NextButton_pressed"]

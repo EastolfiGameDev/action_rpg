@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scenes/ui/menu/SettingsMenu.gd" type="Script" id=1]
+[ext_resource path="res://scenes/ui/menu/BottomNavigation.tscn" type="PackedScene" id=2]
+
+[node name="SettingsMenu" type="Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="JoystickToggle" type="CheckButton" parent="."]
+margin_right = 76.0
+margin_bottom = 40.0
+text = "Joystick"
+
+[node name="BottomNavigation" parent="." instance=ExtResource( 2 )]
+show_next = false
+[connection signal="toggled" from="JoystickToggle" to="." method="_on_CheckButton_toggled"]
+[connection signal="previous" from="BottomNavigation" to="." method="_on_BottomNavigation_previous"]

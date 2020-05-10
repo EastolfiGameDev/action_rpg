@@ -1,0 +1,61 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://scenes/ui/menu/MenuLabel.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/ui/menu/MenuButton.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/ui/menu/NewGame.gd" type="Script" id=3]
+
+[node name="NewGame" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+margin_left = 70.0
+margin_top = 55.0
+margin_right = 250.0
+margin_bottom = 124.0
+
+[node name="Label" parent="CenterContainer/VBoxContainer" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 180.0
+margin_bottom = 21.0
+text = "New Game"
+
+[node name="Buttons" type="VBoxContainer" parent="CenterContainer/VBoxContainer"]
+margin_top = 25.0
+margin_right = 180.0
+margin_bottom = 69.0
+
+[node name="MenuButton2" parent="CenterContainer/VBoxContainer/Buttons" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 180.0
+margin_bottom = 20.0
+
+[node name="Label" parent="CenterContainer/VBoxContainer/Buttons/MenuButton2" index="0"]
+text = "Create"
+
+[node name="MenuButton" parent="CenterContainer/VBoxContainer/Buttons" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_top = 24.0
+margin_right = 180.0
+margin_bottom = 44.0
+scene_to_load = "res://scenes/ui/menu/TitleScreen.tscn"
+
+[node name="Label" parent="CenterContainer/VBoxContainer/Buttons/MenuButton" index="0"]
+text = "Back"
+[connection signal="pressed" from="CenterContainer/VBoxContainer/Buttons/MenuButton2" to="." method="_on_MenuButton2_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/Buttons/MenuButton" to="." method="_on_MenuButton_pressed"]
+
+[editable path="CenterContainer/VBoxContainer/Buttons/MenuButton2"]
+
+[editable path="CenterContainer/VBoxContainer/Buttons/MenuButton"]

@@ -1,4 +1,5 @@
 extends Node2D
 
-func _ready():
-    GameState.load_game_state()
+func initialize(params: Dictionary):
+    if params.get("load_state") == true:
+        GameState.load_game_state()

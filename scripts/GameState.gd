@@ -14,7 +14,6 @@ var player_stats = {
     health = 4,
     max_health = 4
 }
-#var _current_scene: Node = null
 
 func change_scene(path: String, options: Dictionary = {}, params: Dictionary = {}):
     if options.has("with_transition") and options.with_transition == true:
@@ -26,20 +25,13 @@ func change_scene(path: String, options: Dictionary = {}, params: Dictionary = {
         call_deferred("_change_scene_deferred", path, params)
 
 func _change_scene_deferred(path: String, _params: Dictionary):
-#    _current_scene.free()
-    
-#    var next_scene = load(path)
-    
-#    _current_scene = next_scene.instance()
-#
-#    if _current_scene.has_method('set_params'):
-#        _current_scene.set_params(params)
-#
-#    get_tree().get_root().add_child(_current_scene)
-#    get_tree().current_scene = _current_scene
-#    get_tree().set_current_scene(_current_scene)
-#    return get_tree().change_scene_to(next_scene)
-    return get_tree().change_scene(path)
+    var next_scene = load(path)
+    var scene = next_scene.instance()
+    if scene:
+        get_tree()._change_scene(scene)
+        
+        if _params.size() > 0 and scene.has_method("initialize"):
+            scene.initialize(_params)
 
 func update_player_stats(new_stats):
     for stat in new_stats:

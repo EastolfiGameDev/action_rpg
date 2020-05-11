@@ -1,7 +1,7 @@
 extends Control
 
-onready var new_game: Button = $MarginContainer/Menu/CenterRow/Buttons/NewGameButton
-onready var continue_game: Button = $MarginContainer/Menu/CenterRow/Buttons/ContinueButton
+onready var new_game: Button = $MarginContainer/Menu/HBoxContainer/CenterRow/Buttons/NewGameButton
+onready var continue_game: Button = $MarginContainer/Menu/HBoxContainer/CenterRow/Buttons/ContinueButton
 
 func _ready():
     new_game.grab_focus()
@@ -24,6 +24,11 @@ func _on_ContinueButton_pressed():
         load_state = true
     })
 
+func _on_MenuButton_pressed():
+    GameState.change_scene("res://scenes/ui/menu/multiplayer/OnlineMenu.tscn", {
+        with_transition = true
+    })
 
 func _on_SettingsButton3_pressed():
-    pass # Replace with function body.
+    pass
+

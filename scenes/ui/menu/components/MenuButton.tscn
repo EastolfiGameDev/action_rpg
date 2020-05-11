@@ -1,14 +1,13 @@
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://scenes/ui/menu/components/MenuLabel.tscn" type="PackedScene" id=1]
-[ext_resource path="res://scenes/ui/menu/MenuButton.gd" type="Script" id=2]
-
+[ext_resource path="res://scenes/ui/menu/components/MenuButton.gd" type="Script" id=2]
 
 [node name="MenuButton" type="Button"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_bottom = -160.0
-rect_min_size = Vector2( 180, 20 )
+rect_min_size = Vector2( 80, 20 )
 flat = true
 script = ExtResource( 2 )
 __meta__ = {

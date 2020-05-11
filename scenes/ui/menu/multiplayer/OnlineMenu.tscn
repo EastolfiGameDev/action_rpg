@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://resources/main_theme.tres" type="Theme" id=1]
-[ext_resource path="res://scenes/ui/menu/BottomNavigation.tscn" type="PackedScene" id=2]
-[ext_resource path="res://scenes/ui/menu/OnlineMenu.gd" type="Script" id=3]
+[ext_resource path="res://scenes/ui/menu/components/BottomNavigation.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/ui/menu/multiplayer/OnlineMenu.gd" type="Script" id=3]
 
 [node name="OnlineMenu" type="Panel"]
 anchor_right = 1.0
@@ -35,7 +35,7 @@ __meta__ = {
 
 [node name="PlayerInfoPanel" type="Panel" parent="MarginContainer/MainContainer"]
 margin_right = 310.0
-margin_bottom = 32.0
+margin_bottom = 31.0
 size_flags_vertical = 3
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/MainContainer/PlayerInfoPanel"]
@@ -46,7 +46,7 @@ __meta__ = {
 }
 
 [node name="Label" type="Label" parent="MarginContainer/MainContainer/PlayerInfoPanel/HBoxContainer"]
-margin_top = 10.0
+margin_top = 9.0
 margin_right = 153.0
 margin_bottom = 22.0
 size_flags_horizontal = 3
@@ -55,25 +55,25 @@ text = "Player Name"
 [node name="PlayerName" type="LineEdit" parent="MarginContainer/MainContainer/PlayerInfoPanel/HBoxContainer"]
 margin_left = 157.0
 margin_right = 310.0
-margin_bottom = 32.0
+margin_bottom = 31.0
 size_flags_horizontal = 3
 text = "Player"
 
 [node name="HSeparator" type="HSeparator" parent="MarginContainer/MainContainer"]
-margin_top = 36.0
+margin_top = 35.0
 margin_right = 310.0
-margin_bottom = 40.0
+margin_bottom = 39.0
 
 [node name="OnlineContainer" type="HBoxContainer" parent="MarginContainer/MainContainer"]
-margin_top = 44.0
+margin_top = 43.0
 margin_right = 310.0
-margin_bottom = 140.0
+margin_bottom = 137.0
 size_flags_vertical = 3
 size_flags_stretch_ratio = 3.0
 
 [node name="HostPanel" type="Panel" parent="MarginContainer/MainContainer/OnlineContainer"]
 margin_right = 149.0
-margin_bottom = 96.0
+margin_bottom = 94.0
 size_flags_horizontal = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/MainContainer/OnlineContainer/HostPanel"]
@@ -84,13 +84,13 @@ __meta__ = {
 }
 
 [node name="ServerNameContainer" type="HBoxContainer" parent="MarginContainer/MainContainer/OnlineContainer/HostPanel/VBoxContainer"]
-margin_right = 149.0
-margin_bottom = 22.0
+margin_right = 157.0
+margin_bottom = 23.0
 
 [node name="Label" type="Label" parent="MarginContainer/MainContainer/OnlineContainer/HostPanel/VBoxContainer/ServerNameContainer"]
 margin_top = 5.0
-margin_right = 72.0
-margin_bottom = 17.0
+margin_right = 76.0
+margin_bottom = 18.0
 size_flags_horizontal = 3
 text = "Server Name"
 __meta__ = {
@@ -98,21 +98,21 @@ __meta__ = {
 }
 
 [node name="ServerName" type="LineEdit" parent="MarginContainer/MainContainer/OnlineContainer/HostPanel/VBoxContainer/ServerNameContainer"]
-margin_left = 76.0
-margin_right = 149.0
-margin_bottom = 22.0
+margin_left = 80.0
+margin_right = 157.0
+margin_bottom = 23.0
 size_flags_horizontal = 3
 text = "127.0.0.1"
 
 [node name="ServerPortContainer" type="HBoxContainer" parent="MarginContainer/MainContainer/OnlineContainer/HostPanel/VBoxContainer"]
-margin_top = 26.0
-margin_right = 149.0
-margin_bottom = 48.0
+margin_top = 27.0
+margin_right = 157.0
+margin_bottom = 50.0
 
 [node name="Label" type="Label" parent="MarginContainer/MainContainer/OnlineContainer/HostPanel/VBoxContainer/ServerPortContainer"]
 margin_top = 5.0
-margin_right = 72.0
-margin_bottom = 17.0
+margin_right = 76.0
+margin_bottom = 18.0
 size_flags_horizontal = 3
 text = "Ssrver Port"
 __meta__ = {
@@ -120,21 +120,21 @@ __meta__ = {
 }
 
 [node name="ServerPort" type="LineEdit" parent="MarginContainer/MainContainer/OnlineContainer/HostPanel/VBoxContainer/ServerPortContainer"]
-margin_left = 76.0
-margin_right = 149.0
-margin_bottom = 22.0
+margin_left = 80.0
+margin_right = 157.0
+margin_bottom = 23.0
 size_flags_horizontal = 3
 text = "4546"
 
 [node name="MaxPlayersContainer" type="HBoxContainer" parent="MarginContainer/MainContainer/OnlineContainer/HostPanel/VBoxContainer"]
-margin_top = 52.0
-margin_right = 149.0
-margin_bottom = 74.0
+margin_top = 54.0
+margin_right = 157.0
+margin_bottom = 77.0
 
 [node name="Label" type="Label" parent="MarginContainer/MainContainer/OnlineContainer/HostPanel/VBoxContainer/MaxPlayersContainer"]
 margin_top = 5.0
-margin_right = 76.0
-margin_bottom = 17.0
+margin_right = 91.0
+margin_bottom = 18.0
 size_flags_horizontal = 3
 text = "Max Connections"
 __meta__ = {
@@ -142,30 +142,30 @@ __meta__ = {
 }
 
 [node name="MaxPlayers" type="SpinBox" parent="MarginContainer/MainContainer/OnlineContainer/HostPanel/VBoxContainer/MaxPlayersContainer"]
-margin_left = 80.0
-margin_right = 149.0
-margin_bottom = 22.0
+margin_left = 95.0
+margin_right = 157.0
+margin_bottom = 23.0
 size_flags_horizontal = 3
 min_value = 1.0
 max_value = 16.0
 value = 3.0
 
 [node name="CenterContainer" type="CenterContainer" parent="MarginContainer/MainContainer/OnlineContainer/HostPanel/VBoxContainer"]
-margin_top = 78.0
-margin_right = 149.0
-margin_bottom = 96.0
+margin_top = 81.0
+margin_right = 157.0
+margin_bottom = 100.0
 
 [node name="CreateButton" type="Button" parent="MarginContainer/MainContainer/OnlineContainer/HostPanel/VBoxContainer/CenterContainer"]
-margin_left = 40.0
-margin_right = 109.0
-margin_bottom = 18.0
+margin_left = 39.0
+margin_right = 117.0
+margin_bottom = 19.0
 size_flags_horizontal = 0
 text = "Create Game"
 
 [node name="VSeparator" type="VSeparator" parent="MarginContainer/MainContainer/OnlineContainer"]
 margin_left = 153.0
 margin_right = 157.0
-margin_bottom = 96.0
+margin_bottom = 94.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -173,7 +173,7 @@ __meta__ = {
 [node name="JoinPanel" type="Panel" parent="MarginContainer/MainContainer/OnlineContainer"]
 margin_left = 161.0
 margin_right = 310.0
-margin_bottom = 96.0
+margin_bottom = 94.0
 size_flags_horizontal = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/MainContainer/OnlineContainer/JoinPanel"]
@@ -185,12 +185,12 @@ __meta__ = {
 
 [node name="JoinIPContainer" type="HBoxContainer" parent="MarginContainer/MainContainer/OnlineContainer/JoinPanel/VBoxContainer"]
 margin_right = 149.0
-margin_bottom = 22.0
+margin_bottom = 23.0
 
 [node name="Label" type="Label" parent="MarginContainer/MainContainer/OnlineContainer/JoinPanel/VBoxContainer/JoinIPContainer"]
 margin_top = 5.0
 margin_right = 72.0
-margin_bottom = 17.0
+margin_bottom = 18.0
 size_flags_horizontal = 3
 text = "Server Name"
 __meta__ = {
@@ -200,19 +200,19 @@ __meta__ = {
 [node name="JoinIP" type="LineEdit" parent="MarginContainer/MainContainer/OnlineContainer/JoinPanel/VBoxContainer/JoinIPContainer"]
 margin_left = 76.0
 margin_right = 149.0
-margin_bottom = 22.0
+margin_bottom = 23.0
 size_flags_horizontal = 3
 text = "127.0.0.1"
 
 [node name="JoinPortContainer" type="HBoxContainer" parent="MarginContainer/MainContainer/OnlineContainer/JoinPanel/VBoxContainer"]
-margin_top = 26.0
+margin_top = 27.0
 margin_right = 149.0
-margin_bottom = 48.0
+margin_bottom = 50.0
 
 [node name="Label" type="Label" parent="MarginContainer/MainContainer/OnlineContainer/JoinPanel/VBoxContainer/JoinPortContainer"]
 margin_top = 5.0
 margin_right = 72.0
-margin_bottom = 17.0
+margin_bottom = 18.0
 size_flags_horizontal = 3
 text = "Ssrver Port"
 __meta__ = {
@@ -222,34 +222,34 @@ __meta__ = {
 [node name="JoinPort" type="LineEdit" parent="MarginContainer/MainContainer/OnlineContainer/JoinPanel/VBoxContainer/JoinPortContainer"]
 margin_left = 76.0
 margin_right = 149.0
-margin_bottom = 22.0
+margin_bottom = 23.0
 size_flags_horizontal = 3
 text = "4546"
 
 [node name="CenterContainer" type="CenterContainer" parent="MarginContainer/MainContainer/OnlineContainer/JoinPanel/VBoxContainer"]
-margin_top = 52.0
+margin_top = 54.0
 margin_right = 149.0
-margin_bottom = 70.0
+margin_bottom = 73.0
 
 [node name="JoinButton" type="Button" parent="MarginContainer/MainContainer/OnlineContainer/JoinPanel/VBoxContainer/CenterContainer"]
-margin_left = 45.0
-margin_right = 104.0
-margin_bottom = 18.0
+margin_left = 40.0
+margin_right = 108.0
+margin_bottom = 19.0
 size_flags_horizontal = 0
 text = "Join Game"
 
 [node name="HSeparator2" type="HSeparator" parent="MarginContainer/MainContainer"]
-margin_top = 144.0
+margin_top = 141.0
 margin_right = 310.0
-margin_bottom = 148.0
+margin_bottom = 145.0
 
 [node name="BottomNavigation" parent="MarginContainer/MainContainer" instance=ExtResource( 2 )]
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 152.0
+margin_top = 149.0
 margin_right = 310.0
-margin_bottom = 170.0
+margin_bottom = 169.0
 show_next = false
 [connection signal="pressed" from="MarginContainer/MainContainer/OnlineContainer/HostPanel/VBoxContainer/CenterContainer/CreateButton" to="." method="_on_CreateButton_pressed"]
 [connection signal="pressed" from="MarginContainer/MainContainer/OnlineContainer/JoinPanel/VBoxContainer/CenterContainer/JoinButton" to="." method="_on_JoinButton_pressed"]

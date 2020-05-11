@@ -1,7 +1,9 @@
 keys,en,es
 GLOBALS.BACK,"Back","Atrás"
+GLOBALS.NEXT,"Next","Siguiente"
 MENU.NEW_GAME.TITLE,"New Game","Nueva Partida"
 MENU.NEW_GAME.CREATE,"Create Game","Crear Partida"
+MENU.MULTIPLAYER.TITLE,"Multiplayer","Multijugador"
 MENU.CONTINUE.TITLE,"Continue","Continuar"
 MENU.SETTINGS.TITLE,"Settings","Ajustes"
 MENU.VERSION.LABEL,"Version","Versión"

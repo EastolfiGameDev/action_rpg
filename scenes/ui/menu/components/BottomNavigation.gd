@@ -1,22 +1,22 @@
 extends HBoxContainer
 
-export(String) var previous_text = "Previous"
-export(String) var next_text = "Next"
+export(String) var previous_text = "GLOBALS.BACK"
+export(String) var next_text = "GLOBALS.NEXT"
 export(bool) var show_previous = true
 export(bool) var show_next = true
 
 signal previous
 signal next
 
-onready var previous_button: Button = $CenterContainer/PreviousButton
-onready var next_button: Button = $CenterContainer2/NextButton
+onready var previous_button: Button = $CenterContainer/PreviousButton/Label
+onready var next_button: Button = $CenterContainer2/NextButton/Label
 
 func _ready():
     previous_button.visible = show_previous
-    previous_button.text = previous_text
+    previous_button.text = tr(previous_text)
     
-    next_button.text = next_text
     next_button.visible = show_next
+    next_button.text = tr(next_text)
 
 func disable_previous_button() -> void:
     next_button.disabled = true

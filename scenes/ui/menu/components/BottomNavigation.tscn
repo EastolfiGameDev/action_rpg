@@ -1,0 +1,51 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scenes/ui/menu/components/BottomNavigation.gd" type="Script" id=1]
+[ext_resource path="res://scenes/ui/menu/components/MenuButton.tscn" type="PackedScene" id=2]
+
+[node name="BottomNavigation" type="HBoxContainer"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -20.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+margin_right = 158.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+
+[node name="PreviousButton" parent="CenterContainer" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 39.0
+margin_right = 119.0
+margin_bottom = 20.0
+
+[node name="Label" parent="CenterContainer/PreviousButton" index="0"]
+text = "Back"
+
+[node name="CenterContainer2" type="CenterContainer" parent="."]
+margin_left = 162.0
+margin_right = 320.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+
+[node name="NextButton" parent="CenterContainer2" instance=ExtResource( 2 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 39.0
+margin_right = 119.0
+margin_bottom = 20.0
+
+[node name="Label" parent="CenterContainer2/NextButton" index="0"]
+text = "Next"
+[connection signal="pressed" from="CenterContainer/PreviousButton" to="." method="_on_PreviousButton_pressed"]
+[connection signal="pressed" from="CenterContainer2/NextButton" to="." method="_on_NextButton_pressed"]
+
+[editable path="CenterContainer/PreviousButton"]
+
+[editable path="CenterContainer2/NextButton"]

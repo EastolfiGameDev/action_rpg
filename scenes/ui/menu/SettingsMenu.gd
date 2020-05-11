@@ -10,4 +10,4 @@ func _on_CheckButton_toggled(button_pressed: bool):
 
 
 func _on_BottomNavigation_previous():
-    GameState.change_scene("res://scenes/ui/menu/MainMenu.tscn")
+    GameState.change_scene("res://scenes/ui/menu/TitleScreen.tscn")

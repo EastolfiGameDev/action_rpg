@@ -20,6 +20,8 @@ func _on_NewGameButton_pressed():
 func _on_ContinueButton_pressed():
     GameState.change_scene("res://scenes/levels/grass/grass_world_1_1.tscn", {
         with_transition = true
+    }, {
+        load_state = true
     })
 
 

@@ -199,6 +199,9 @@ func _on_SkillButton_pressed():
         yield(get_tree().create_timer(1.0), "timeout")
         visible = true
 
+func _on_ScreenControls_interact_button_pressed():
+    get_tree().call_group("Interactable", "interact_from_button")
+
 func _on_Stats_no_health():
     for scent in scent_trail:
         scent.queue_free()
@@ -226,3 +229,4 @@ func _on_Hurtbox_invincibility_started():
 
 func _on_Hurtbox_invincibility_ended():
     effect_animator.play("blink_stop")
+

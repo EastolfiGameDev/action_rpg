@@ -10,6 +10,7 @@ var state = States.CLOSE
 
 func _ready():
     Animator.play("idle")
+    $InteractArea.add_to_group("Interactable")
 
 func end_interact():
     _close_chest()

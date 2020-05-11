@@ -6,6 +6,10 @@ signal movement_skill_button_down
 signal movement_skill_button_pressed
 signal skill_button_down
 signal skill_button_pressed
+signal interact_button_pressed
+
+func _ready():
+    $InteractButton.enabled = false
 
 func get_joystick_input() -> Vector2:
     return $VirtualJoystick.output
@@ -38,3 +42,7 @@ func _on_SkillButton_button_up():
 
 func _on_SkillButton_pressed():
     emit_signal("skill_button_pressed")
+
+
+func _on_InteractButton_pressed():
+    emit_signal("interact_button_pressed")

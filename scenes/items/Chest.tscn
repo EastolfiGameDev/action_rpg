@@ -57,7 +57,7 @@ tracks/0/keys = {
 }
 
 [sub_resource type="RectangleShape2D" id=5]
-extents = Vector2( 15, 15 )
+extents = Vector2( 20, 20 )
 
 [node name="Chest" type="StaticBody2D"]
 position = Vector2( -288, -152 )

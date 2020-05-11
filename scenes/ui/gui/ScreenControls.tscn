@@ -24,35 +24,44 @@ margin_bottom = 160.0
 rect_scale = Vector2( 0.2, 0.2 )
 
 [node name="AttackButton" parent="." instance=ExtResource( 1 )]
-margin_left = 222.072
-margin_top = 128.494
-margin_right = 350.072
-margin_bottom = 256.494
+margin_left = 220.0
+margin_top = 130.0
+margin_right = 348.0
+margin_bottom = 258.0
 rect_scale = Vector2( 0.2, 0.2 )
 
 [node name="Icon" parent="AttackButton" index="0"]
 texture = ExtResource( 5 )
 
 [node name="MovementSkillButton" parent="." instance=ExtResource( 1 )]
-margin_left = 261.877
-margin_top = 99.164
-margin_right = 389.877
-margin_bottom = 227.164
+margin_left = 255.0
+margin_top = 100.0
+margin_right = 383.0
+margin_bottom = 228.0
 rect_scale = Vector2( 0.2, 0.2 )
 
 [node name="Icon" parent="MovementSkillButton" index="0"]
 texture = ExtResource( 6 )
 
 [node name="SkillButton" parent="." instance=ExtResource( 1 )]
-margin_left = 265.369
-margin_top = 141.064
-margin_right = 393.369
-margin_bottom = 269.064
+margin_left = 265.0
+margin_top = 140.0
+margin_right = 393.0
+margin_bottom = 268.0
 rect_scale = Vector2( 0.2, 0.2 )
 enabled = false
 
 [node name="Icon" parent="SkillButton" index="0"]
 texture = ExtResource( 4 )
+
+[node name="InteractButton" parent="." groups=[
+"InteractButtons",
+] instance=ExtResource( 1 )]
+margin_left = 150.0
+margin_top = 150.0
+margin_right = 278.0
+margin_bottom = 278.0
+rect_scale = Vector2( 0.2, 0.2 )
 [connection signal="button_down" from="AttackButton" to="." method="_on_AttackButton_button_down"]
 [connection signal="button_up" from="AttackButton" to="." method="_on_AttackButton_button_up"]
 [connection signal="pressed" from="AttackButton" to="." method="_on_AttackButton_pressed"]
@@ -62,6 +71,7 @@ texture = ExtResource( 4 )
 [connection signal="button_down" from="SkillButton" to="." method="_on_SkillButton_button_down"]
 [connection signal="button_up" from="SkillButton" to="." method="_on_SkillButton_button_up"]
 [connection signal="pressed" from="SkillButton" to="." method="_on_SkillButton_pressed"]
+[connection signal="pressed" from="InteractButton" to="." method="_on_InteractButton_pressed"]
 
 [editable path="VirtualJoystick"]
 

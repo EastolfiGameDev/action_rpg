@@ -12,8 +12,6 @@
 [ext_resource path="res://assets/sfx/Evade.wav" type="AudioStream" id=10]
 [ext_resource path="res://shaders/WhiteColor.shader" type="Shader" id=11]
 
-
-
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 11 )
 shader_param/active = false
@@ -848,6 +846,7 @@ shape = SubResource( 50 )
 wait_time = 0.2
 [connection signal="no_health" from="Stats" to="." method="_on_Stats_no_health"]
 [connection signal="attack_button_pressed" from="ScreenControls" to="." method="_on_AttackButton_pressed"]
+[connection signal="interact_button_pressed" from="ScreenControls" to="." method="_on_ScreenControls_interact_button_pressed"]
 [connection signal="movement_skill_button_pressed" from="ScreenControls" to="." method="_on_MovementSkillButton_pressed"]
 [connection signal="skill_button_pressed" from="ScreenControls" to="." method="_on_SkillButton_pressed"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]

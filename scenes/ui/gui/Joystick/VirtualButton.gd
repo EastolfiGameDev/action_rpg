@@ -7,7 +7,7 @@ signal button_up
 signal pressed
 
 export(Color) var _pressed_color := Color.gray
-export(bool) var enabled := true
+export(bool) var enabled := true setget set_enabled
 
 onready var effects := $Tween
 
@@ -19,18 +19,12 @@ var _current_index = -1
 var _current_state = State.NONE
 
 func _ready():
-
     if OS.has_touchscreen_ui_hint() and enabled:
-        modulate.a = 0.3
-        _original_color.a = 0.3
-        set_process(true)
-        set_process_input(true)
+        _enable_button()
     elif OS.has_touchscreen_ui_hint() and not enabled:
-        modulate.a = 0.1
-        set_process_input(false)
+        _disable_button()
     else:
         visible = false
-        set_process(false)
         set_process_input(false)
 
 func _input(event):
@@ -79,6 +73,23 @@ func fade_out():
     
     effects.interpolate_property(self, "modulate", origin, target, 0.2, Tween.TRANS_LINEAR, Tween.EASE_OUT)
     effects.start()
+
+func set_enabled(value: bool):
+    enabled = value
+    
+    if enabled:
+        _enable_button()
+    else:
+        _disable_button()
+
+func _enable_button():
+    modulate.a = 0.3
+    _original_color.a = 0.3
+    set_process_input(true)
+
+func _disable_button():
+    modulate.a = 0.1
+    set_process_input(false)
 
 func _is_within_rect(position: Vector2) -> bool:
     var offset = (Vector2.ONE - rect_scale) * (rect_pivot_offset)

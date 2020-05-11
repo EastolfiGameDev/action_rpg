@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scenes/levels/grass/RoomGenerator.gd" type="Script" id=1]
+[ext_resource path="res://assets/World/GrassBackground.png" type="Texture" id=2]
+
+[node name="RoomGenerator" type="RigidBody2D"]
+mode = 2
+gravity_scale = 0.0
+script = ExtResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+modulate = Color( 1, 1, 1, 0.341176 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 528, 176 )

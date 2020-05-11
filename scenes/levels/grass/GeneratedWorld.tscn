@@ -1,0 +1,125 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://scenes/levels/grass/GeneratedWorld.gd" type="Script" id=2]
+[ext_resource path="res://scenes/tilemaps/CliffAutotile.tscn" type="PackedScene" id=3]
+[ext_resource path="res://resources/main_theme.tres" type="Theme" id=4]
+[ext_resource path="res://scenes/tilemaps/DirtWaterAutotile.tscn" type="PackedScene" id=5]
+
+[node name="GeneratedWorld" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="GenerateRooms" type="Button" parent="CanvasLayer"]
+margin_left = 5.0
+margin_top = 30.0
+margin_right = 61.0
+margin_bottom = 50.0
+text = "Rooms"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GenerateMap" type="Button" parent="CanvasLayer"]
+margin_left = 5.0
+margin_top = 60.0
+margin_right = 44.0
+margin_bottom = 80.0
+text = "Map"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Start" type="Button" parent="CanvasLayer"]
+margin_left = 5.0
+margin_top = 85.0
+margin_right = 46.0
+margin_bottom = 105.0
+text = "Start"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CameraZoom" type="HSlider" parent="CanvasLayer"]
+margin_left = 5.0
+margin_top = 5.0
+margin_right = 61.0
+margin_bottom = 21.0
+theme = ExtResource( 4 )
+min_value = 1.0
+max_value = 30.0
+value = 15.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RoomNumber" type="SpinBox" parent="CanvasLayer"]
+margin_left = 64.8076
+margin_top = 2.68355
+margin_right = 126.808
+margin_bottom = 24.6836
+theme = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HSpread" type="SpinBox" parent="CanvasLayer"]
+margin_left = 126.739
+margin_top = 4.07342
+margin_right = 188.739
+margin_bottom = 26.0734
+theme = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VSpread" type="SpinBox" parent="CanvasLayer"]
+margin_left = 189.965
+margin_top = 4.53671
+margin_right = 251.965
+margin_bottom = 26.5367
+theme = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RoomBackground" type="CheckButton" parent="CanvasLayer"]
+margin_left = 5.0
+margin_top = 105.0
+margin_right = 81.0
+margin_bottom = 145.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CullRatio" type="HSlider" parent="CanvasLayer"]
+margin_left = 255.176
+margin_top = 8.24303
+margin_right = 311.176
+margin_bottom = 24.243
+theme = ExtResource( 4 )
+max_value = 0.9
+step = 0.1
+value = 0.4
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Rooms" type="Node" parent="."]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+zoom = Vector2( 3, 3 )
+
+[node name="DirtWaterAutotile" parent="." instance=ExtResource( 5 )]
+
+[node name="CliffAutotile" parent="." instance=ExtResource( 3 )]
+[connection signal="pressed" from="CanvasLayer/GenerateRooms" to="." method="_on_Button_pressed"]
+[connection signal="pressed" from="CanvasLayer/GenerateMap" to="." method="_on_Button2_pressed"]
+[connection signal="pressed" from="CanvasLayer/Start" to="." method="_on_Start_pressed"]
+[connection signal="value_changed" from="CanvasLayer/CameraZoom" to="." method="_on_HSlider_value_changed"]
+[connection signal="value_changed" from="CanvasLayer/RoomNumber" to="." method="_on_RoomNumber_value_changed"]
+[connection signal="value_changed" from="CanvasLayer/HSpread" to="." method="_on_HSpread_value_changed"]
+[connection signal="value_changed" from="CanvasLayer/VSpread" to="." method="_on_VSpread_value_changed"]
+[connection signal="toggled" from="CanvasLayer/RoomBackground" to="." method="_on_RoomBackground_toggled"]
+[connection signal="value_changed" from="CanvasLayer/CullRatio" to="." method="_on_CullRatio_value_changed"]

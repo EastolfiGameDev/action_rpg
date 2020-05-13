@@ -62,7 +62,11 @@ func on_player_stats_updated(stats: Dictionary):
 
 func show_hint_message(message: String, position: Vector2):
     Hint.text = message
-    Hint.rect_size = Vector2.ZERO
+    if message.length() > 30:
+        Hint.autowrap = true
+        Hint.rect_size.x = 100
+    else:
+        Hint.rect_size = Vector2.ZERO
     Hint.visible = true
     
     Hint.get_parent().remove_child(Hint)

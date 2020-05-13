@@ -82,6 +82,7 @@ anims/idle = SubResource( 3 )
 anims/open = SubResource( 4 )
 
 [node name="InteractArea" parent="." instance=ExtResource( 3 )]
+show_hint = false
 
 [node name="CollisionShape2D" parent="InteractArea" index="0"]
 shape = SubResource( 5 )

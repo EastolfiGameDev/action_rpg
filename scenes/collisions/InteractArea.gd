@@ -4,7 +4,8 @@ signal interact_start(actor)
 signal interact(actor)
 signal interact_end(actor)
 
-export(bool) var show_hint: bool = true
+export(bool) var show_hint := true
+export(String) var hint_message := ""
 
 onready var shape: Shape2D = $CollisionShape2D.shape
 
@@ -18,15 +19,22 @@ func init_interact():
     get_tree().call_group("InteractButtons", "set_enabled", true)
 
     if show_hint:
-        var message = ""
-        if not OS.has_touchscreen_ui_hint():
-            for key in InputMap.get_action_list("interact"):
-                if message.length() > 0:
-                    message += " | "
-                message += key.as_text()
+        var message: String
+        if OS.has_touchscreen_ui_hint():
+            message = tr(hint_message + ".MOBILE")
+        else:
+            message = tr(hint_message)
         
-            get_tree().call_group("HUD", "show_hint_message", message, $HintPosition.global_position)
-    
+        # Interpolation string - can be improved
+        var key_list = ""
+        for key in InputMap.get_action_list("interact"):
+            if key_list.length() > 0:
+                key_list += " | "
+            key_list += key.as_text()
+        message = message.replace("%interact_key%", key_list)
+        
+        get_tree().call_group("HUD", "show_hint_message", message, $HintPosition.global_position)
+
     emit_signal("interact_start", actor)
 
 func end_interact():

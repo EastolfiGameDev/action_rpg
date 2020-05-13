@@ -155,11 +155,11 @@ START_STATE = NodePath("Idle")
 
 [node name="Idle" type="Node" parent="StateMachine"]
 script = ExtResource( 1 )
-possible_next_random_states = [ 0, 1 ]
+possible_next_random_states = [ 0, 2 ]
 
 [node name="Wander" type="Node" parent="StateMachine"]
 script = ExtResource( 3 )
-possible_next_random_states = [ 0, 1 ]
+possible_next_random_states = [ 0, 2 ]
 WanderControllerPath = NodePath("../../WanderControler")
 
 [node name="Chase" type="Node" parent="StateMachine"]

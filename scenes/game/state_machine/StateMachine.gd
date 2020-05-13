@@ -43,6 +43,25 @@ func _change_state(state_name, _params = {}):
 func _is_state(state_name) -> bool:
     return current_state == states_map[state_name]
 
+func _get_state_label(state) -> String:
+    match state:
+        Constants.STATES.SLEEP:
+            return "Sleep"
+        Constants.STATES.IDLE:
+            return "Idle"
+        Constants.STATES.WANDER:
+            return "Wander"
+        Constants.STATES.CHASE:
+            return "Chase"
+        Constants.STATES.HURT:
+            return "Hurt"
+        Constants.STATES.DIE:
+            return "Die"
+        Constants.STATES.PREVIOUS:
+            return "Previous"
+        _:
+            return "Unknown (" + str(state) + ")"
+
 #########
 func _input(event):
     if current_state.has_method("handle_input"):

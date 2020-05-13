@@ -1,0 +1,221 @@
+[gd_scene load_steps=32 format=2]
+
+[ext_resource path="res://assets/sprites/characters/enemies/mimic_sprite_sheet.png" type="Texture" id=1]
+[ext_resource path="res://scenes/characters/enemies/Mimic/Mimic.gd" type="Script" id=2]
+[ext_resource path="res://scenes/characters/enemies/Mimic/StateMachine.gd" type="Script" id=3]
+[ext_resource path="res://scenes/game/state_machine/states/motion/idle.gd" type="Script" id=4]
+[ext_resource path="res://scenes/collisions/DetectionZone.tscn" type="PackedScene" id=5]
+[ext_resource path="res://assets/sprites/shadows/MediumShadow.png" type="Texture" id=6]
+[ext_resource path="res://scenes/game/state_machine/states/static/sleep.gd" type="Script" id=7]
+
+[sub_resource type="Animation" id=1]
+resource_name = "die"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 81, 82, 83, 84 ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "idle"
+length = 0.6
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 64, 65, 66, 67, 68, 69 ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "move"
+length = 0.8
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 72, 73, 74, 75, 76, 77, 78, 79 ]
+}
+
+[sub_resource type="Animation" id=15]
+resource_name = "sleep"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 60, 59, 58, 57, 56 ]
+}
+
+[sub_resource type="Animation" id=18]
+resource_name = "sleeping"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 56 ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "wake_up"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 56, 57, 58, 59, 60 ]
+}
+
+[sub_resource type="AnimationNodeAnimation" id=5]
+animation = "idle"
+
+[sub_resource type="AnimationNodeAnimation" id=6]
+animation = "move"
+
+[sub_resource type="AnimationNodeAnimation" id=16]
+animation = "sleep"
+
+[sub_resource type="AnimationNodeAnimation" id=19]
+animation = "sleeping"
+
+[sub_resource type="AnimationNodeAnimation" id=7]
+animation = "wake_up"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=9]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=10]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=17]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=21]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=22]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=23]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=24]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=25]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=26]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id=11]
+states/idle/node = SubResource( 5 )
+states/idle/position = Vector2( 270, 47 )
+states/move/node = SubResource( 6 )
+states/move/position = Vector2( 663, 190 )
+states/sleep/node = SubResource( 16 )
+states/sleep/position = Vector2( 270, 290 )
+states/sleeping/node = SubResource( 19 )
+states/sleeping/position = Vector2( 120, 190 )
+states/wake_up/node = SubResource( 7 )
+states/wake_up/position = Vector2( 389, 190 )
+transitions = [ "move", "idle", SubResource( 9 ), "idle", "move", SubResource( 10 ), "idle", "sleep", SubResource( 17 ), "sleep", "wake_up", SubResource( 21 ), "wake_up", "idle", SubResource( 22 ), "wake_up", "move", SubResource( 23 ), "sleeping", "wake_up", SubResource( 24 ), "wake_up", "sleep", SubResource( 25 ), "sleep", "sleeping", SubResource( 26 ) ]
+start_node = "sleeping"
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=12]
+
+[sub_resource type="CapsuleShape2D" id=14]
+radius = 4.0
+height = 8.0
+
+[sub_resource type="CircleShape2D" id=13]
+radius = 15.0
+
+[node name="Mimic" type="KinematicBody2D"]
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Shadow" type="Sprite" parent="."]
+position = Vector2( 0, 2 )
+texture = ExtResource( 6 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 0.5, -11 )
+texture = ExtResource( 1 )
+vframes = 11
+hframes = 8
+frame = 56
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/die = SubResource( 1 )
+anims/idle = SubResource( 2 )
+anims/move = SubResource( 3 )
+anims/sleep = SubResource( 15 )
+anims/sleeping = SubResource( 18 )
+anims/wake_up = SubResource( 4 )
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource( 11 )
+anim_player = NodePath("../AnimationPlayer")
+active = true
+parameters/playback = SubResource( 12 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+rotation = 1.5708
+shape = SubResource( 14 )
+
+[node name="DetectionZone" parent="." instance=ExtResource( 5 )]
+visible = false
+
+[node name="CollisionShape2D" parent="DetectionZone" index="0"]
+position = Vector2( 0, 4 )
+shape = SubResource( 13 )
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource( 3 )
+START_STATE = NodePath("Sleep")
+
+[node name="Sleep" type="Node" parent="StateMachine"]
+script = ExtResource( 7 )
+
+[node name="Idle" type="Node" parent="StateMachine"]
+script = ExtResource( 4 )
+[connection signal="target_found" from="DetectionZone" to="." method="_on_DetectionZone_target_found"]
+[connection signal="target_lost" from="DetectionZone" to="." method="_on_DetectionZone_target_lost"]
+
+[editable path="DetectionZone"]

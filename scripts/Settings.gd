@@ -12,9 +12,11 @@ func _ready():
 #    save_settings()
     load_settings()
 
-func get_setting(section: String, setting: String):
-#    print(_settings[section][setting])
-    return _settings[section][setting]
+func get_setting(section: String, setting: String) -> String:
+    if _settings.has(section) and _settings[section].has(setting):
+        return _settings[section][setting]
+    
+    return ""
 
 func load_settings():
     var file = ConfigFile.new()

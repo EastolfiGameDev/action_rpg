@@ -3,6 +3,7 @@ extends Node
 signal player_stats_updated(stats)
 
 const FadeIn = preload("res://scenes/effects/FadeIn.tscn")
+const avalaible_langs = [Constants.LANGUAGES.SPANISH, Constants.LANGUAGES.ENGLISH]
 
 var player_info = {
     name = "Player",
@@ -14,6 +15,27 @@ var player_stats = {
     health = 4,
     max_health = 4
 }
+
+func _ready():
+    _load_user_language()
+
+func change_language(locale: String):
+    if locale in avalaible_langs:
+        TranslationServer.set_locale(locale)
+        Settings.save_single_setting(Constants.SETTINGS_SECTIONS.GENERAL, "language", locale)
+
+func get_user_language() -> String:
+    var lang: String = Settings.get_setting(Constants.SETTINGS_SECTIONS.GENERAL, "language")
+    
+    if lang != "":
+        return lang
+    else:
+        return TranslationServer.get_locale()
+
+func _load_user_language():
+    var lang: String = get_user_language()
+    if lang and lang.length() > 0:
+        change_language(lang)
 
 func change_scene(path: String, options: Dictionary = {}, params: Dictionary = {}):
     if options.has("with_transition") and options.with_transition == true:

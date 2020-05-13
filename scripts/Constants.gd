@@ -13,3 +13,12 @@ enum STATES {
     HURT, DIE,
     PREVIOUS
 }
+
+const LANGUAGES = {
+    SPANISH = "es",
+    ENGLISH = "en"
+}
+
+const SETTINGS_SECTIONS = {
+    GENERAL = "general"
+}

@@ -8,7 +8,7 @@ export(NodePath) var START_STATE
 
 var states_map = {}
 var states_stack: Array = []
-var current_state = null
+var current_state: State = null
 
 var _active = false
 

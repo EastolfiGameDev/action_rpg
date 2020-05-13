@@ -9,11 +9,6 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "KinematicBody2D",
-"class": "Bullet",
-"language": "GDScript",
-"path": "res://scenes/items/BulletClass.gd"
-}, {
 "base": "Move",
 "class": "Chase",
 "language": "GDScript",
@@ -90,7 +85,6 @@ _global_script_classes=[ {
 "path": "res://scenes/game/state_machine/states/motion/wander.gd"
 } ]
 _global_script_class_icons={
-"Bullet": "",
 "Chase": "",
 "DetectionZone": "",
 "Die": "",

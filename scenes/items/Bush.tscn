@@ -2,7 +2,6 @@
 
 [ext_resource path="res://assets/sprites/world/Bush.png" type="Texture" id=1]
 
-
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 8.0
 height = 13.5682

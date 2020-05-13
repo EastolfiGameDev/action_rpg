@@ -49,6 +49,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/game/state_machine/states/motion/idle.gd"
 }, {
+"base": "Node",
+"class": "Item",
+"language": "GDScript",
+"path": "res://scenes/items/item.gd"
+}, {
 "base": "Control",
 "class": "Joystick",
 "language": "GDScript",
@@ -93,6 +98,7 @@ _global_script_class_icons={
 "FadeEffects": "",
 "Hurt": "",
 "Idle": "",
+"Item": "",
 "Joystick": "",
 "Motion": "",
 "Move": "",
@@ -207,6 +213,7 @@ interact={
 2d_physics/layer_6="SoftCollisions"
 2d_physics/layer_7="Interactable"
 2d_physics/layer_8="ItemsHurtbox"
+2d_physics/layer_9="Loot"
 
 [locale]
 

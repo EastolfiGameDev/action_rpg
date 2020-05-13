@@ -1,0 +1,32 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://assets/items/fantasy_weapons_pack1_noglow.png" type="Texture" id=1]
+[ext_resource path="res://assets/sprites/shadows/MediumShadow.png" type="Texture" id=2]
+[ext_resource path="res://shaders/float_visual_shader.tres" type="Shader" id=3]
+[ext_resource path="res://scenes/items/ItemLoot.gd" type="Script" id=4]
+
+[sub_resource type="ShaderMaterial" id=3]
+shader = ExtResource( 3 )
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 20.0
+
+[node name="ItemLoot" type="Area2D"]
+scale = Vector2( 0.5, 0.5 )
+collision_layer = 256
+collision_mask = 2
+script = ExtResource( 4 )
+
+[node name="Shadow" type="Sprite" parent="."]
+position = Vector2( 0, 20 )
+texture = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="."]
+material = SubResource( 3 )
+texture = ExtResource( 1 )
+vframes = 5
+hframes = 10
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 2 )
+[connection signal="body_entered" from="." to="." method="_on_ItemLoot_body_entered"]

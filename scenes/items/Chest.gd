@@ -1,5 +1,7 @@
 extends StaticBody2D
 
+const Loot = preload("res://scenes/items/ItemLoot.tscn")
+
 onready var Animator: AnimationPlayer = $AnimationPlayer
 
 enum States {
@@ -15,17 +17,20 @@ func _ready():
 func end_interact():
     _close_chest()
 
-func interact(actor: Node2D):
+func interact():
     if state == States.CLOSE:
-        _open_chest(actor)
+        _open_chest()
     else:
         _close_chest()
 
-func _open_chest(actor: Node2D):
+func _open_chest():
     Animator.play("open")
     state = States.OPEN
-    if actor.has_method("chest_opened"):
-        actor.chest_opened()
+    
+    # Spawn loot -> to generic class
+    var loot = Loot.instance()
+    loot.position = position + Vector2(20, 0)
+    get_parent().add_child(loot)
 
 func _close_chest():
     if state != States.CLOSE:
@@ -33,8 +38,8 @@ func _close_chest():
         state = States.CLOSE
 
 
-func _on_InteractArea_interact(actor: Node2D):
-    interact(actor)
+func _on_InteractArea_interact(_actor: Node2D):
+    interact()
 
 
 func _on_InteractArea_interact_end(_actor: Node2D):

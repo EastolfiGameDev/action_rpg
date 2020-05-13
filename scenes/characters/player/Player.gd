@@ -101,7 +101,10 @@ func _check_action():
         perform_attack()
     elif Input.is_action_just_pressed("move_skill"):
         perform_movement_skill()
-        
+
+func pick_up(item: Item):
+    sword_hitbox.damage = item.damage
+
 func perform_attack():
     change_state(States.ATTACK)
 

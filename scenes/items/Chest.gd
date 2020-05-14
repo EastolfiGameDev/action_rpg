@@ -1,14 +1,14 @@
 extends StaticBody2D
 
-const Loot = preload("res://scenes/items/ItemLoot.tscn")
-
 onready var Animator: AnimationPlayer = $AnimationPlayer
+onready var Looter = $Loot
 
 enum States {
     OPEN, CLOSE
 }
 
 var state = States.CLOSE
+var looted = false
 
 func _ready():
     Animator.play("idle")
@@ -27,10 +27,9 @@ func _open_chest():
     Animator.play("open")
     state = States.OPEN
     
-    # Spawn loot -> to generic class
-    var loot = Loot.instance()
-    loot.position = position + Vector2(20, 0)
-    get_parent().add_child(loot)
+    if not looted:
+        Looter.drop_loot(self)
+        looted = true
 
 func _close_chest():
     if state != States.CLOSE:

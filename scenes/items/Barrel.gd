@@ -11,5 +11,8 @@ func _ready():
 func destroy():
     animation.play("destroy")
 
+func drop_loot():
+    $Loot.drop_loot(self)
+
 func _on_Hurtbox_area_entered(_area):
     destroy()

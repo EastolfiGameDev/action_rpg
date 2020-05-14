@@ -10,6 +10,7 @@ onready var RemotePlayerList: VBoxContainer = $PlayerList/VBoxContainer/RemotePl
 onready var HeartEmpty: TextureRect = $HealthDisplay/HeartEmpty
 onready var HeartFull: TextureRect = $HealthDisplay/HeartFull
 onready var Hint: Label = $Hint
+onready var GoldAmountLabel: Label = $Control/CoinAmount
 
 func _ready():
     GameState.connect("player_stats_updated", self, "on_player_stats_updated")
@@ -23,6 +24,7 @@ func _ready():
         update_player_list()
     
     Hint.visible = false
+    GoldAmountLabel.text = "0"
 
 func update_health(value: int):
     HeartFull.rect_size.x = clamp(value, 0, GameState.player_stats.max_health) * HEART_SIZE.x
@@ -33,6 +35,10 @@ func update_max_health(value: int):
         HeartEmpty.rect_size.x = max(value, 1) * HEART_SIZE.x
     else:
         HeartEmpty.rect_size.x = max(value, 1) * HEART_SIZE.x
+
+
+func update_gold_amount(amount: int):
+    GoldAmountLabel.text = str(amount)
 
 func update_player_name(name: String):
     LocalPlayerName.text = name
@@ -56,8 +62,8 @@ func on_player_stats_updated(stats: Dictionary):
         update_health(stats.health)
     if stats.has("max_health"):
         update_max_health(stats.max_health)
-
-
+    if stats.has("gold"):
+        update_gold_amount(stats.gold)
 
 
 func show_hint_message(message: String, position: Vector2):

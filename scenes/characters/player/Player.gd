@@ -103,7 +103,13 @@ func _check_action():
         perform_movement_skill()
 
 func pick_up(item: Item):
-    sword_hitbox.damage = item.damage
+    if item.damage > 0:
+        stats.damage += item.damage
+    if item.gold > 0:
+        stats.gold += item.gold
+
+func get_stats() -> Stats:
+    return stats
 
 func perform_attack():
     change_state(States.ATTACK)
@@ -147,12 +153,12 @@ func add_scent():
 
 #### PERSISTENCE ####
 
-func save():
-    var save_dict = {
-        "filename" : get_filename(),
-        "parent" : get_parent().get_path(),
-        "pos_x" : position.x, # Vector2 is not supported by JSON
-        "pos_y" : position.y,
+func save() -> Dictionary:
+    return {
+        "filename": get_filename(),
+#        "parent": get_parent().get_path(),
+        "pos_x": position.x, # Vector2 is not supported by JSON
+        "pos_y": position.y,
 #        "attack" : attack,
 #        "defense" : defense,
 #        "current_health" : current_health,
@@ -168,7 +174,6 @@ func save():
 #        "is_alive" : is_alive,
 #        "last_attack" : last_attack
     }
-    return save_dict
 
 #### SET - GET ####
 func enemies_chasing(value: int):

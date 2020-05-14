@@ -1,3 +1,5 @@
+#### SPLIT THIS CLASS INTO SMALLER ONES AND PRELOAD THEM AT START ####
+
 extends Node
 
 signal player_stats_updated(stats)
@@ -89,8 +91,6 @@ func save_game_state():
 
         var node_data = node.call("save")
         save_data[node.get_path()] = node_data
-
-#        save_game.store_line(to_json(node_data))
     
     if save_data.keys().size() > 0:
         var save_game = File.new()
@@ -111,10 +111,6 @@ func load_game_state():
         # Error! We don't have a save to load.
         return
 
-#    var nodes_to_restore = get_tree().get_nodes_in_group("Persist")
-#    for node in nodes_to_restore:
-#        node.queue_free()
-
     save_game.open(Constants.SAVE_FILE, File.READ)
     var save_data: Dictionary = parse_json(save_game.get_as_text())
     for node_path in save_data.keys():
@@ -122,24 +118,14 @@ func load_game_state():
         
         var node_data = save_data[node_path]
         for attribute in node_data:
+            var value = node_data[attribute]
             if attribute == "pos_x":
-                (node as Node2D).position.x = node_data[attribute]
+                (node as Node2D).position.x = value
             if attribute == "pos_y":
-                (node as Node2D).position.y = node_data[attribute]
-
-#    while save_game.get_position() < save_game.get_len():
-#        var node_data = parse_json(save_game.get_line())
-#
-#        var new_node = load(node_data["filename"]).instance()
-#        get_node(node_data["parent"]).call_deferred("add_child", new_node)
-#        new_node.position = Vector2(node_data["pos_x"], node_data["pos_y"])
-#
-#        for key in node_data.keys():
-#            if key == "filename" or key == "parent" or key == "pos_x" or key == "pos_y":
-#                # Already handled
-#                continue
-#
-#            new_node.set(key, node_data[key])
+                (node as Node2D).position.y = value
+            
+            if not attribute in ["pos_x", "pos_y", "filename"]:
+                node[attribute] = value
 
     save_game.close()
     

@@ -759,7 +759,9 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[node name="Stats" parent="." instance=ExtResource( 6 )]
+[node name="Stats" parent="." groups=[
+"Persist",
+] instance=ExtResource( 6 )]
 is_player = true
 max_health = 5
 
@@ -828,6 +830,7 @@ rotation = 1.5708
 position = Vector2( 15, 0 )
 collision_mask = 8
 script = ExtResource( 4 )
+is_player = true
 
 [node name="CollisionShape2D" parent="HitboxPivot/SwordHitbox" index="0"]
 shape = SubResource( 49 )

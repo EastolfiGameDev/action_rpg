@@ -7,8 +7,8 @@
 [sub_resource type="CircleShape2D" id=1]
 radius = 6.60251
 
-[sub_resource type="CircleShape2D" id=2]
-radius = 18.2898
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 8, 6 )
 
 [node name="Sign" type="StaticBody2D"]
 collision_mask = 0
@@ -33,7 +33,7 @@ visible = false
 hint_message = "GAME.HINT.PRESS_TO_INTERACT"
 
 [node name="CollisionShape2D" parent="InteractArea" index="0"]
-position = Vector2( 0, -7 )
+position = Vector2( 0, 0 )
 shape = SubResource( 2 )
 
 [node name="HintPosition" parent="InteractArea" index="1"]

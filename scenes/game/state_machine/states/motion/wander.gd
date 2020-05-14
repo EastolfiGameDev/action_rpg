@@ -17,9 +17,8 @@ func exit():
 func handle_physics_process(delta):
     WanderController.wander()
     accelerate_towards(WanderController.target_position, delta)
-    
-    .handle_physics_process(delta)
 
+    .handle_physics_process(delta)
 
 func _on_WanderControler_wander_finish():
     pick_random_state()

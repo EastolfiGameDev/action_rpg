@@ -16,9 +16,10 @@ func _change_state(state_name, params = {}):
     if state_name == Constants.STATES.HURT:
         if _has_parameter(params, "area"):
             var area = params.area
-            states_map[Constants.STATES.HURT].initialize(area.damage)
-            if area.get("knockback_vector") and current_state.has_method("set_knockback_vector"):
-                current_state.set_knockback_vector(area.knockback_vector)
+            states_map[Constants.STATES.HURT].initialize(area.damage, area.knockback_vector)
+    if state_name == Constants.STATES.CHASE:
+        if _has_parameter(params, "knockback"):
+            states_map[Constants.STATES.CHASE].set_knockback_vector(params.knockback)
         
     ._change_state(state_name)
 

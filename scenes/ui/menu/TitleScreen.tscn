@@ -111,7 +111,6 @@ anchor_bottom = 0.0
 margin_top = 116.0
 margin_right = 207.0
 margin_bottom = 136.0
-disabled = true
 
 [node name="Label" parent="MarginContainer/Menu/HBoxContainer/CenterRow/Buttons/SettingsButton3" index="0"]
 text = "MENU.SETTINGS.TITLE"

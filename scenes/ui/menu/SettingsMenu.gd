@@ -1,13 +1,23 @@
 extends Panel
 
-onready var JoystickToggle: CheckButton = $JoystickToggle
+const CODE_PROMO_TEST = "YETI_MISSING_SAVEFILE"
 
-func _ready():
-    JoystickToggle.pressed = Settings.get_setting("controls", "touch_screen")
-
-func _on_CheckButton_toggled(button_pressed: bool):
-    Settings.save_single_setting("controls", "touch_screen", button_pressed)
-
+onready var code_promo: LineEdit = $MarginContainer/VBoxContainer/CodePromoContainer/HBoxContainer/CodePromo
 
 func _on_BottomNavigation_previous():
     GameState.change_scene("res://scenes/ui/menu/TitleScreen.tscn")
+
+
+func _on_CodePromoSubmit_pressed():
+    if code_promo.text == CODE_PROMO_TEST:
+        var save_data = GameState.read_game_state()
+        
+        for key in save_data.keys():
+            if key.ends_with("Player/Stats"):
+                var stats: Dictionary = save_data[key]
+                if stats.has("gold"):
+                    stats.gold += 10
+                save_data[key] = stats
+
+        GameState.persist_save_data(save_data)
+        code_promo.clear()

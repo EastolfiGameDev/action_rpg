@@ -48,9 +48,9 @@ func _on_MenuButton_pressed():
     })
 
 func _on_SettingsButton3_pressed():
-    pass
-
-
+    GameState.change_scene("res://scenes/ui/menu/SettingsMenu.tscn", {
+        with_transition = true
+    })
 
 func _on_LangButton_pressed():
     GameState.change_language(next_lang)

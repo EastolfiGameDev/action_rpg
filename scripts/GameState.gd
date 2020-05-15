@@ -77,7 +77,7 @@ func _notification(event):
     elif event == MainLoop.NOTIFICATION_WM_GO_BACK_REQUEST:
         print("back")
 
-func save_game_state():
+func get_save_information() -> Dictionary:
     var save_data := {}
     var nodes_to_save = get_tree().get_nodes_in_group("Persist")
     for node in nodes_to_save:
@@ -92,6 +92,9 @@ func save_game_state():
         var node_data = node.call("save")
         save_data[node.get_path()] = node_data
     
+    return save_data
+
+func persist_save_data(save_data: Dictionary):
     if save_data.keys().size() > 0:
         var save_game = File.new()
         save_game.open(Constants.SAVE_FILE, File.WRITE)
@@ -100,19 +103,28 @@ func save_game_state():
         
         save_game.close()
 
+func save_game_state():
+    var save_data = get_save_information()
+    persist_save_data(save_data)
 
 func has_saved_game() -> bool:
     var save_game := File.new()
     return save_game.file_exists(Constants.SAVE_FILE)
 
-func load_game_state():
+func read_game_state() -> Dictionary:
     var save_game = File.new()
     if not save_game.file_exists(Constants.SAVE_FILE):
         # Error! We don't have a save to load.
-        return
+        return {}
 
     save_game.open(Constants.SAVE_FILE, File.READ)
     var save_data: Dictionary = parse_json(save_game.get_as_text())
+    save_game.close()
+
+    return save_data
+    
+
+func restore_game_state(save_data: Dictionary):
     for node_path in save_data.keys():
         var node = get_node(node_path)
         
@@ -127,12 +139,6 @@ func load_game_state():
             if not attribute in ["pos_x", "pos_y", "filename"]:
                 node[attribute] = value
 
-    save_game.close()
-    
-    
-    
-    
-    
-    
-    
-    
+func load_game_state():
+    var save_data = read_game_state()
+    restore_game_state(save_data)
